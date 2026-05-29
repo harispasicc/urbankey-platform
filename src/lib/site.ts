@@ -6,7 +6,7 @@ export const siteConfig = {
     "Professional Airbnb and Booking apartment management in Sarajevo. Guest communication, cleaning coordination, check-ins, pricing optimization, and owner support.",
   url:
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-    "https://urbankeysarajevo.com",
+    "https://www.urbankey.ba",
   locale: "en_BA",
   email: "urbankeysarajevo@gmail.com",
   phone: "+38762566150",

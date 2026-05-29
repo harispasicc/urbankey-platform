@@ -7,8 +7,6 @@ export const translations = {
   bs,
 } as const;
 
-export type { TranslationCopy } from "../types";
-
 export function getTranslations(locale: Locale) {
   return translations[locale];
 }

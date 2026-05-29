@@ -2,7 +2,7 @@
 
 import { useCallback, useId, useState } from "react";
 
-export type FaqItem = {
+type FaqItem = {
   id: string;
   question: string;
   answer: string;

@@ -118,20 +118,20 @@ export function Navbar() {
       }`}
     >
       <div
-        className={`${siteContainer} flex items-center justify-between py-3 sm:py-3.5`}
+        className={`${siteContainer} flex items-center justify-between gap-3 py-3 sm:gap-4 sm:py-3.5`}
       >
         <Link
           href="/"
-          className="flex shrink-0 items-center"
+          className="flex min-w-0 shrink items-center"
           onClick={closeMenu}
           aria-label="UrbanKey Sarajevo"
         >
           <BrandLogoLockup priority />
         </Link>
 
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-3 lg:gap-5 xl:gap-6 2xl:gap-8">
           <nav
-            className="hidden items-center gap-6 lg:flex lg:gap-8 xl:gap-9"
+            className="hidden items-center lg:flex lg:gap-5 xl:gap-6 2xl:gap-8"
             aria-label={t.nav.primaryAria}
           >
             {navLinks.map((link) => (
@@ -161,7 +161,7 @@ export function Navbar() {
 
       <div
         id="mobile-nav"
-        className={`overflow-hidden border-t border-urban-gold/10 bg-urban-cream/98 backdrop-blur-sm transition-[max-height,opacity] duration-300 ease-out lg:hidden ${menuOpen ? "max-h-[22rem] opacity-100" : "max-h-0 opacity-0"}`}
+        className={`overflow-hidden border-t border-urban-gold/10 bg-urban-cream/98 backdrop-blur-sm transition-[max-height,opacity] duration-300 ease-out lg:hidden ${menuOpen ? "max-h-[min(22rem,70dvh)] opacity-100" : "max-h-0 opacity-0"}`}
         aria-hidden={!menuOpen}
       >
         <nav

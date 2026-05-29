@@ -47,7 +47,7 @@ export function LanguageSwitcher() {
         type="button"
         data-testid="language-switcher-trigger"
         onClick={() => setOpen((v) => !v)}
-        className="flex h-10 w-10 items-center justify-center rounded-full border border-urban-gold/15 bg-urban-cream/90 text-urban-navy shadow-sm transition hover:border-urban-gold/40 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-urban-gold"
+        className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-urban-gold/15 bg-urban-cream/90 text-urban-navy shadow-sm transition hover:border-urban-gold/40 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-urban-gold"
         aria-label={`${t.lang.label}: ${currentLabel}`}
         aria-expanded={open}
         aria-haspopup="listbox"

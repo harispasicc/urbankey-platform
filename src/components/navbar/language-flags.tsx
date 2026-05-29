@@ -9,7 +9,7 @@ export function FlagEn({ size = 22, className }: FlagProps) {
     <FlagGb
       width={size}
       height={size}
-      className={className}
+      className={`block shrink-0 rounded-full ${className ?? ""}`}
       title="English"
     />
   );
@@ -20,7 +20,7 @@ export function FlagBs({ size = 22, className }: FlagProps) {
     <FlagBa
       width={size}
       height={size}
-      className={className}
+      className={`block shrink-0 rounded-full ${className ?? ""}`}
       title="Bosanski"
     />
   );

@@ -49,7 +49,7 @@ export function CtaSection() {
             </p>
 
             <div className="mt-8">
-              <CtaSecondaryButton href="#services" variant="light">
+              <CtaSecondaryButton href="#services">
                 {t.contact.viewServices}
               </CtaSecondaryButton>
             </div>

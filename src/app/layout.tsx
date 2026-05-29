@@ -44,9 +44,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [{ url: "/urbankey-logo.png", type: "image/png", sizes: "any" }],
-    apple: [{ url: "/urbankey-logo.png", type: "image/png" }],
-    shortcut: "/urbankey-logo.png",
+    icon: [{ url: "/icon.png", type: "image/png", sizes: "512x512" }],
+    apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
+    shortcut: "/favicon.ico",
   },
   openGraph: {
     type: "website",
