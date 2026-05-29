@@ -4,22 +4,22 @@ const STATS = [
   { value: "Airbnb & Booking", label: "Platform focus" },
 ] as const;
 
-export function TrustStatsRow() {
+export function TrustStatsRow({ className = "" }: { className?: string }) {
   return (
     <div
-      className="mt-8 grid grid-cols-1 divide-y divide-urban-gold/12 rounded-xl border border-urban-gold/15 bg-urban-sand/50 sm:mt-10 sm:grid-cols-3 sm:divide-x sm:divide-y-0"
+      className={`grid grid-cols-1 divide-y divide-urban-gold/15 rounded-lg border border-urban-gold/18 bg-[#f5f0e8]/80 sm:grid-cols-3 sm:divide-x sm:divide-y-0 ${className}`}
       role="list"
     >
       {STATS.map((item) => (
         <div
           key={item.label}
-          className="px-5 py-5 text-center sm:px-6"
+          className="px-4 py-3.5 text-center sm:px-4 sm:py-4"
           role="listitem"
         >
-          <p className="font-display text-xl font-semibold text-urban-navy sm:text-2xl">
+          <p className="font-display text-lg font-semibold text-balance text-urban-navy sm:text-xl">
             {item.value}
           </p>
-          <p className="mt-1.5 text-[0.8125rem] leading-snug text-urban-charcoal/85">
+          <p className="mt-1 text-[0.75rem] leading-snug text-urban-charcoal/85 sm:text-[0.8125rem]">
             {item.label}
           </p>
         </div>

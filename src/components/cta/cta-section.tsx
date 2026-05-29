@@ -1,17 +1,16 @@
-import { siteContainer } from "@/lib/layout";
-import { CTA_CONTACT } from "./cta-data";
-import { CtaPrimaryButton, CtaSecondaryButton } from "./cta-buttons";
-import { ContactCard } from "./contact-card";
+import { siteContainer, sectionEyebrow } from "@/lib/layout";
+import { ContactPanel } from "./contact-panel";
+import { CtaSecondaryButton } from "./cta-buttons";
 
 function CtaCopy() {
   return (
     <div className="max-w-xl lg:py-2">
-      <p className="text-[0.6875rem] font-medium uppercase tracking-[0.26em] text-urban-gold/90">
+      <p className={`${sectionEyebrow} text-urban-gold/90`}>
         Start with UrbanKey
       </p>
       <h2
         id="contact-heading"
-        className="mt-3 font-sans text-[1.75rem] font-bold leading-[1.12] tracking-[-0.02em] text-white sm:text-[2rem] lg:text-[2.125rem]"
+        className="mt-3 font-sans text-[clamp(1.625rem,4.5vw,2.125rem)] font-bold leading-[1.12] tracking-[-0.02em] text-white"
       >
         Own the apartment. Let us handle the operations.
       </h2>
@@ -24,13 +23,7 @@ function CtaCopy() {
         Local team. Clear communication. Stress-free management.
       </p>
 
-      <div className="mt-8 flex flex-col gap-2.5 sm:flex-row sm:items-center sm:gap-3">
-        <CtaPrimaryButton
-          href={`${CTA_CONTACT.emailHref}?subject=Consultation%20request`}
-          variant="light"
-        >
-          Schedule a consultation
-        </CtaPrimaryButton>
+      <div className="mt-8">
         <CtaSecondaryButton href="#services" variant="light">
           View services
         </CtaSecondaryButton>
@@ -60,10 +53,10 @@ export function CtaSection() {
         aria-hidden
       />
 
-      <div className={`${siteContainer} relative pb-20 pt-16 sm:pb-24 sm:pt-20 lg:pb-28 lg:pt-24`}>
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-16">
+      <div className={`${siteContainer} relative pb-16 pt-12 sm:pb-20 sm:pt-16 lg:pb-28 lg:pt-24 xl:pb-32`}>
+        <div className="grid min-w-0 items-start gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-16 2xl:gap-20">
           <CtaCopy />
-          <ContactCard />
+          <ContactPanel />
         </div>
       </div>
     </section>

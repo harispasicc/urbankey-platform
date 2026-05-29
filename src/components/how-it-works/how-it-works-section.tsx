@@ -1,34 +1,31 @@
-import { siteContainer } from "@/lib/layout";
-import { ProcessStepCard, ProcessStepTimeline } from "./process-step";
+import {
+  siteContainer,
+  sectionEyebrow,
+  sectionHeading,
+  sectionProse,
+} from "@/lib/layout";
+import { ProcessStepFlow, ProcessStepTimeline } from "./process-step";
 import { PROCESS_STEPS } from "./steps-data";
-
-const ROW_ONE = PROCESS_STEPS.slice(0, 3);
-const ROW_TWO = PROCESS_STEPS.slice(3);
 
 function HowItWorksHeader() {
   return (
-    <header className="max-w-2xl">
-      <p className="text-[0.6875rem] font-medium uppercase tracking-[0.26em] text-urban-brass">
-        How it works
-      </p>
-      <h2
-        id="how-it-works-heading"
-        className="mt-3 font-sans text-[1.75rem] font-bold leading-[1.12] tracking-[-0.02em] text-urban-navy sm:text-[2rem] lg:text-[2.125rem]"
-      >
-        A simple path to stress-free apartment ownership.
+    <header className="max-w-2xl lg:max-w-xl">
+      <p className={sectionEyebrow}>How it works</p>
+      <h2 id="how-it-works-heading" className={`mt-3 ${sectionHeading}`}>
+        How cooperation with UrbanKey works
       </h2>
       <div className="mt-4 h-px w-12 bg-urban-gold/45" aria-hidden />
-      <p className="mt-4 max-w-xl text-[1.0625rem] leading-relaxed text-urban-charcoal sm:text-lg">
-        We take over guests, operations, and coordination — so you can earn from
-        your apartment without the daily pressure.
+      <p className={`mt-4 ${sectionProse}`}>
+        A clear onboarding and management process — from first conversation to
+        ongoing operations, with you kept in the loop.
       </p>
     </header>
   );
 }
 
-function ProcessTimelineMobile() {
+function ProcessTimelineVertical() {
   return (
-    <ol className="mt-10 space-y-0 sm:mt-12 lg:hidden">
+    <ol className="mt-10 sm:mt-12 lg:hidden">
       {PROCESS_STEPS.map((item, index) => (
         <ProcessStepTimeline
           key={item.step}
@@ -40,26 +37,16 @@ function ProcessTimelineMobile() {
   );
 }
 
-function ProcessFlowDesktop() {
+function ProcessFlowHorizontal() {
   return (
-    <div className="relative mt-14 hidden space-y-8 lg:block">
-      <ol className="grid grid-cols-3 gap-6">
-        {ROW_ONE.map((item, index) => (
-          <ProcessStepCard
-            key={item.step}
-            {...item}
-            emphasizeNumber={index === 0}
-          />
-        ))}
-      </ol>
-
-      <ol className="mx-auto grid max-w-3xl grid-cols-2 gap-6">
-        {ROW_TWO.map((item, index) => (
-          <ProcessStepCard
-            key={item.step}
-            {...item}
-            emphasizeNumber={index === ROW_TWO.length - 1}
-          />
+    <div className="relative mt-12 hidden lg:block xl:mt-14">
+      <div
+        className="pointer-events-none absolute inset-x-[8%] top-5 h-px bg-gradient-to-r from-transparent via-urban-gold/30 to-transparent"
+        aria-hidden
+      />
+      <ol className="flex w-full items-start justify-between gap-0">
+        {PROCESS_STEPS.map((item) => (
+          <ProcessStepFlow key={item.step} {...item} />
         ))}
       </ol>
     </div>
@@ -71,25 +58,19 @@ export function HowItWorksSection() {
     <section
       id="how-it-works"
       aria-labelledby="how-it-works-heading"
-      className="grain relative overflow-hidden bg-gradient-to-b from-urban-cream via-[#f7f3ec] to-[#f0ebe3]"
+      className="relative overflow-hidden border-y border-urban-navy/[0.04] bg-[#faf9f6]"
     >
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_15%_15%,rgba(154,130,86,0.07),transparent_55%)]"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_45%_at_85%_75%,rgba(154,130,86,0.06),transparent_50%)]"
-        aria-hidden
-      />
-      <div
-        className={`${siteContainer} relative h-px bg-gradient-to-r from-transparent via-urban-gold/22 to-transparent`}
+        className="pointer-events-none absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-urban-gold/25 via-urban-gold/10 to-transparent"
         aria-hidden
       />
 
-      <div className={`${siteContainer} relative py-12 sm:py-14 lg:py-16`}>
+      <div
+        className={`${siteContainer} relative py-12 sm:py-14 lg:py-16 xl:py-20`}
+      >
         <HowItWorksHeader />
-        <ProcessTimelineMobile />
-        <ProcessFlowDesktop />
+        <ProcessTimelineVertical />
+        <ProcessFlowHorizontal />
       </div>
     </section>
   );

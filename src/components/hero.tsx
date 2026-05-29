@@ -3,10 +3,9 @@ import Link from "next/link";
 import { siteContainer } from "@/lib/layout";
 
 const TRUST_SIGNALS = [
-  "Local Sarajevo-based management team",
-  "Airbnb & Booking optimized",
-  "Guest communication handled 24/7",
-  "Professional hosting support",
+  "Sarajevo apartment management",
+  "Airbnb & Booking operations",
+  "Owner-first communication",
 ] as const;
 
 const FLOATING_CARDS = [
@@ -17,7 +16,7 @@ const FLOATING_CARDS = [
 ] as const;
 
 const FLOATING_CARD_CLASS =
-  "flex min-h-[2rem] w-max max-w-[10rem] items-center justify-center rounded-sm border border-urban-gold/12 bg-[#faf6f0]/50 px-3 py-2 shadow-[0_1px_8px_rgba(100,75,40,0.05)] backdrop-blur-[2px]";
+  "flex min-h-[2rem] max-w-[9.5rem] items-center justify-center rounded-sm border border-urban-gold/12 bg-[#faf6f0]/50 px-2.5 py-1.5 shadow-[0_1px_8px_rgba(100,75,40,0.05)] backdrop-blur-[2px] sm:max-w-[10rem] sm:px-3 sm:py-2";
 
 function ArrowIcon({ className }: { className?: string }) {
   return (
@@ -42,14 +41,11 @@ function ArrowIcon({ className }: { className?: string }) {
 
 function HeroHeadline() {
   return (
-    <h1
-      id="hero-heading"
-      className="max-w-[21rem] sm:max-w-[23rem] lg:max-w-[24rem]"
-    >
-      <span className="block font-sans text-[1.875rem] font-bold leading-[1.08] tracking-[-0.02em] text-urban-navy sm:text-[2.125rem] lg:text-[2.375rem]">
+    <h1 id="hero-heading" className="max-w-xl text-balance">
+      <span className="block font-sans text-[clamp(1.75rem,5vw,2.5rem)] font-bold leading-[1.08] tracking-[-0.02em] text-urban-navy">
         We manage your apartment.
       </span>
-      <span className="mt-1 block font-display text-[1.875rem] font-semibold leading-[1.06] tracking-[-0.01em] text-urban-brass sm:mt-1.5 sm:text-[2.125rem] lg:text-[2.375rem]">
+      <span className="mt-1 block font-display text-[clamp(1.75rem,5vw,2.5rem)] font-semibold leading-[1.06] tracking-[-0.01em] text-urban-brass sm:mt-1.5">
         You earn stress-free.
       </span>
     </h1>
@@ -58,9 +54,9 @@ function HeroHeadline() {
 
 function HeroCopy() {
   return (
-    <div className="max-w-[28rem] space-y-2.5">
+    <div className="max-w-xl space-y-2.5">
       <p className="text-[1.0625rem] font-semibold leading-snug text-urban-navy/90 sm:text-lg">
-        Professional Airbnb &amp; Booking management in Sarajevo — for owners
+        Airbnb &amp; Booking apartment management in Sarajevo — for owners
         who want calm, not constant coordination.
       </p>
       <p className="text-[0.9375rem] leading-[1.6] text-urban-charcoal">
@@ -93,9 +89,9 @@ function TrustIcon() {
 function HeroTrustRow() {
   return (
     <div className="border-t border-urban-navy/[0.07] pt-3">
-      <ul className="flex flex-col gap-2 sm:grid sm:grid-cols-2 sm:gap-x-5 sm:gap-y-2 lg:flex lg:flex-row lg:flex-wrap lg:gap-x-6 lg:gap-y-2">
+      <ul className="grid grid-cols-1 gap-2 min-[400px]:grid-cols-2 sm:gap-x-5 sm:gap-y-2 lg:flex lg:flex-row lg:flex-wrap lg:gap-x-6">
         {TRUST_SIGNALS.map((item) => (
-          <li key={item} className="flex items-center gap-2">
+          <li key={item} className="flex min-w-0 items-start gap-2">
             <TrustIcon />
             <span className="text-[0.75rem] leading-snug text-urban-charcoal/85">
               {item}
@@ -109,17 +105,17 @@ function HeroTrustRow() {
 
 function HeroCtaGroup() {
   return (
-    <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:gap-3">
+    <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
       <Link
-        href="#contact"
-        className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-b from-[#ad8f5e] to-urban-gold px-6 py-3 text-sm font-semibold tracking-[0.02em] text-urban-navy shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_2px_4px_rgba(20,24,32,0.06),0_8px_24px_rgba(154,130,86,0.28)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:from-[#b89a6e] hover:to-[#c4a87a] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_4px_8px_rgba(20,24,32,0.08),0_12px_32px_rgba(154,130,86,0.32)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-urban-gold"
+        href="#contact-form"
+        className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-b from-[#ad8f5e] to-urban-gold px-6 py-3.5 text-sm font-semibold tracking-[0.02em] text-urban-navy shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_2px_4px_rgba(20,24,32,0.06),0_8px_24px_rgba(154,130,86,0.28)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:from-[#b89a6e] hover:to-[#c4a87a] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_4px_8px_rgba(20,24,32,0.08),0_12px_32px_rgba(154,130,86,0.32)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-urban-gold sm:w-auto sm:py-3"
       >
         Schedule a consultation
         <ArrowIcon className="opacity-85 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0.5" />
       </Link>
       <Link
         href="#services"
-        className="inline-flex items-center justify-center rounded-full border border-urban-navy/10 bg-[#f3ede4] px-6 py-3 text-sm font-semibold tracking-[0.01em] text-urban-navy/90 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-urban-gold/30 hover:bg-[#faf6f0] hover:text-urban-navy hover:shadow-[0_2px_16px_rgba(154,130,86,0.08)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-urban-navy"
+        className="inline-flex w-full items-center justify-center rounded-full border border-urban-navy/10 bg-[#f3ede4] px-6 py-3.5 text-sm font-semibold tracking-[0.01em] text-urban-navy/90 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-urban-gold/30 hover:bg-[#faf6f0] hover:text-urban-navy hover:shadow-[0_2px_16px_rgba(154,130,86,0.08)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-urban-navy sm:w-auto sm:py-3"
       >
         Explore services
       </Link>
@@ -141,7 +137,7 @@ function FloatingInfoCard({
 
   return (
     <div className={`${FLOATING_CARD_CLASS} ${placement} ${align} ${vertical}`}>
-      <p className="whitespace-nowrap text-[0.6875rem] font-medium leading-none text-urban-navy/72">
+      <p className="text-center text-[0.625rem] font-medium leading-tight text-urban-navy/72 sm:text-[0.6875rem] sm:leading-none">
         {title}
       </p>
     </div>
@@ -150,7 +146,7 @@ function FloatingInfoCard({
 
 function HeroVisual() {
   return (
-    <div className="relative w-full max-w-md sm:max-w-xl lg:-mt-1 lg:max-w-[28.5rem] xl:max-w-[29.5rem]">
+    <div className="relative w-full min-w-0 max-w-lg sm:max-w-xl lg:-mt-1 lg:max-w-[28.5rem] xl:max-w-[32rem] 2xl:max-w-[34rem]">
       <div
         className="pointer-events-none absolute -inset-3 rounded-[1.5rem] bg-[radial-gradient(ellipse_at_55%_45%,rgba(154,130,86,0.06),transparent_70%)]"
         aria-hidden="true"
@@ -162,8 +158,9 @@ function HeroVisual() {
           alt="Comfortable furnished apartment living space with warm, welcoming details"
           fill
           priority
-          sizes="(max-width: 1024px) 90vw, 30rem"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 34rem"
           className="object-cover object-center brightness-[0.97] contrast-[1.08] saturate-[1.05]"
+          fetchPriority="high"
         />
         <div
           className="pointer-events-none absolute inset-0 bg-gradient-to-t from-urban-navy/[0.08] via-transparent to-transparent"
@@ -171,7 +168,7 @@ function HeroVisual() {
         />
 
         <div
-          className="pointer-events-none absolute inset-0 grid grid-cols-2 grid-rows-2 gap-3 p-4 sm:gap-4 sm:p-5"
+          className="pointer-events-none absolute inset-0 hidden grid-cols-2 grid-rows-2 gap-3 p-4 min-[400px]:grid sm:gap-4 sm:p-5"
           aria-hidden="true"
         >
           {FLOATING_CARDS.map((card) => (
@@ -189,7 +186,7 @@ function HeroVisual() {
 
 function HeroContent() {
   return (
-    <div className="lg:max-w-[36rem] lg:pt-2 lg:pr-2">
+    <div className="min-w-0 lg:max-w-[38rem] lg:pt-2 lg:pr-2 xl:max-w-[42rem]">
       <div className="space-y-4 sm:space-y-[1.125rem]">
         <div className="space-y-2.5">
           <HeroHeadline />
@@ -221,10 +218,10 @@ export function Hero() {
         aria-hidden="true"
       />
 
-      <div className={`${siteContainer} relative pb-7 pt-5 sm:pb-8 sm:pt-6 lg:pb-9 lg:pt-8`}>
-        <div className="grid items-center gap-7 sm:gap-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:items-center lg:gap-x-8 xl:gap-x-10">
+      <div className={`${siteContainer} relative pb-8 pt-4 sm:pb-10 sm:pt-6 lg:pb-12 lg:pt-8 xl:pb-14`}>
+        <div className="grid min-w-0 items-center gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:items-center lg:gap-x-10 xl:gap-x-14 2xl:gap-x-16">
           <HeroContent />
-          <div className="flex justify-center lg:justify-end">
+          <div className="flex min-w-0 justify-center lg:justify-end">
             <HeroVisual />
           </div>
         </div>

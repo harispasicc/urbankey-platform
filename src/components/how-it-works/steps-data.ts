@@ -9,30 +9,30 @@ export const PROCESS_STEPS: ProcessStep[] = [
     step: "01",
     title: "Initial consultation",
     description:
-      "We learn about your apartment, goals, and current rental setup.",
+      "We review your apartment, current setup, and goals — then outline how management would work for you.",
   },
   {
     step: "02",
     title: "Apartment onboarding",
     description:
-      "We prepare listings, organize operational details, and align the management process.",
+      "We align listings, calendars, access, cleaning partners, and operational details before guests arrive.",
   },
   {
     step: "03",
-    title: "Guest-ready operations",
+    title: "Live guest operations",
     description:
-      "We manage reservations, guest communication, check-ins, and cleaning coordination.",
+      "UrbanKey runs reservations, guest communication, check-ins, and cleaning coordination day to day.",
   },
   {
     step: "04",
-    title: "Ongoing optimization",
+    title: "Performance review",
     description:
-      "We continuously improve booking performance, pricing, and guest experience.",
+      "We adjust pricing, availability, and listing quality based on seasonality and booking performance.",
   },
   {
     step: "05",
-    title: "Transparent owner support",
+    title: "Owner updates",
     description:
-      "You stay informed while we handle the operational workload.",
+      "You receive clear communication and visibility — without handling guest messages or logistics yourself.",
   },
 ];

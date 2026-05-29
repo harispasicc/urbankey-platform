@@ -7,6 +7,8 @@ import { siteContainer } from "@/lib/layout";
 
 const NAV_LINKS = [
   { href: "#services", label: "Services", id: "services" },
+  { href: "#how-it-works", label: "How it works", id: "how-it-works" },
+  { href: "#why-urban-key", label: "Why UrbanKey", id: "why-urban-key" },
   { href: "#contact", label: "Contact", id: "contact" },
 ] as const;
 
@@ -102,7 +104,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-300 ${
+      className={`sticky top-0 z-50 pt-[env(safe-area-inset-top,0px)] transition-[background-color,box-shadow,backdrop-filter] duration-300 ${
         scrolled
           ? "border-b border-urban-gold/10 bg-urban-cream/72 shadow-[0_2px_16px_rgba(20,24,32,0.04)] backdrop-blur-xl"
           : "border-b border-urban-navy/[0.06] bg-urban-cream/90 backdrop-blur-sm"
@@ -122,6 +124,7 @@ export function Navbar() {
             width={48}
             height={48}
             priority
+            sizes="44px"
             className="h-10 w-10 shrink-0 object-contain sm:h-11 sm:w-11"
             aria-hidden
           />
@@ -136,7 +139,7 @@ export function Navbar() {
         </Link>
 
         <nav
-          className="hidden items-center gap-9 sm:flex"
+          className="hidden items-center gap-6 lg:flex lg:gap-8 xl:gap-9"
           aria-label="Primary"
         >
           {NAV_LINKS.map((link) => (
@@ -151,7 +154,7 @@ export function Navbar() {
 
         <button
           type="button"
-          className="flex h-11 w-11 items-center justify-center rounded-md text-urban-navy transition-colors hover:bg-urban-sand/50 sm:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-md text-urban-navy transition-colors hover:bg-urban-sand/50 lg:hidden"
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -163,7 +166,7 @@ export function Navbar() {
 
       <div
         id="mobile-nav"
-        className={`overflow-hidden border-t border-urban-gold/10 bg-urban-cream/98 backdrop-blur-sm transition-[max-height,opacity] duration-300 ease-out sm:hidden ${menuOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"}`}
+        className={`overflow-hidden border-t border-urban-gold/10 bg-urban-cream/98 backdrop-blur-sm transition-[max-height,opacity] duration-300 ease-out lg:hidden ${menuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"}`}
         aria-hidden={!menuOpen}
       >
         <nav

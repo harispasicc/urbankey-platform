@@ -2,16 +2,25 @@ type IconProps = { className?: string };
 
 export function MessageIcon({ className }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M21 11.5a8.4 8.4 0 0 1-2.1 5.5 8.5 8.5 0 0 1-13.8-6.5 8.4 8.4 0 0 1 2.1-5.5A8.5 8.5 0 0 1 21 11.5Z"
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden
+    >
+      <rect
+        x="5"
+        y="6"
+        width="14"
+        height="12"
+        rx="2.5"
         stroke="currentColor"
         strokeWidth="1.5"
       />
       <path
-        d="M8 14h.01M12 14h.01M16 14h.01"
+        d="M9 10.5h6M9 13.5h4"
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="1.5"
         strokeLinecap="round"
       />
     </svg>

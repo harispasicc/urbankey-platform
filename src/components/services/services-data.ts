@@ -18,7 +18,7 @@ export type ServiceItem = {
 export const FEATURED_SERVICE: ServiceItem = {
   title: "Guest communication",
   description:
-    "We handle guest messages and issues so you stay out of day-to-day stress — warm, professional communication from first inquiry to checkout.",
+    "Inquiries, booking questions, check-in details, and issue handling — managed professionally on your behalf.",
   Icon: MessageIcon,
 };
 
@@ -26,44 +26,37 @@ export const GRID_SERVICES: ServiceItem[] = [
   {
     title: "Airbnb & Booking management",
     description:
-      "We manage listings, reservations, calendars, and booking platforms for maximum visibility.",
+      "Listing setup, calendar sync, reservations, and platform updates across Airbnb and Booking.com.",
     Icon: CalendarIcon,
   },
   {
     title: "Cleaning coordination",
     description:
-      "Organized cleaning workflows and apartment readiness between reservations.",
+      "Turnovers scheduled and tracked so every guest arrives to a prepared apartment.",
     Icon: SparklesIcon,
   },
   {
     title: "Check-in / Check-out",
     description:
-      "Smooth guest arrival and departure management without owner involvement.",
+      "Arrival instructions, access coordination, and departure handling without owner involvement.",
     Icon: KeyIcon,
   },
   {
     title: "Pricing optimization",
     description:
-      "Seasonal and event-based pricing adjustments to improve occupancy and revenue.",
+      "Seasonal and event-based rate adjustments aligned with Sarajevo demand patterns.",
     Icon: ChartIcon,
   },
   {
     title: "Photography & promotion",
     description:
-      "Professional apartment presentation and social media promotion.",
+      "Listing visuals and promotional support so your apartment presents competitively online.",
     Icon: CameraIcon,
   },
   {
     title: "Owner reporting",
     description:
-      "Clear updates and operational transparency for apartment owners.",
+      "Clear operational updates so you always know what is happening with your apartment.",
     Icon: ReportIcon,
   },
 ];
-
-export const TRUST_PROOF = [
-  "Local Sarajevo-based team",
-  "Fast guest response",
-  "Airbnb & Booking support",
-  "Operational transparency",
-] as const;

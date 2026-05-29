@@ -19,7 +19,7 @@ function ServiceIcon({
       className={`flex shrink-0 items-center justify-center rounded-lg border border-urban-gold/20 bg-gradient-to-b from-urban-sand/80 to-[#ebe4d8] text-urban-gold shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] transition-[border-color,background-color,color] duration-300 group-hover:border-urban-gold/35 group-hover:text-[#8a7048] ${large ? "size-12 sm:size-14" : "size-11"}`}
       aria-hidden
     >
-      <Icon className={large ? "size-6" : "size-5"} />
+      <Icon className={`block shrink-0 ${large ? "size-6" : "size-5"}`} />
     </div>
   );
 }
@@ -28,7 +28,7 @@ export function FeaturedServiceCard({ title, description, Icon }: ServiceItem) {
   return (
     <article className={`${CARD_BASE} p-5 sm:p-6`}>
       <span className={CARD_TOP_ACCENT} aria-hidden />
-      <div className="mx-auto flex w-full max-w-2xl flex-col gap-4 sm:flex-row sm:items-start sm:gap-6">
+      <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-start sm:gap-6 lg:mx-auto lg:max-w-3xl">
         <ServiceIcon Icon={Icon} large />
         <div className="min-w-0 flex-1 sm:pt-1">
           <p className="text-[0.625rem] font-medium uppercase tracking-[0.2em] text-urban-brass">

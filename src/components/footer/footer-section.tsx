@@ -4,7 +4,7 @@ import { FooterContact, FooterNavigation } from "./footer-nav-contact";
 
 function FooterBottomBar() {
   return (
-    <div className="flex flex-col gap-3 border-t border-urban-gold/12 py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+    <div className="flex flex-col gap-3 border-t border-urban-gold/12 py-6 text-center sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:text-left">
       <p className="text-[0.8125rem] text-white/50">
         © 2026 UrbanKey Sarajevo. All rights reserved.
       </p>
@@ -28,8 +28,10 @@ export function FooterSection() {
       />
 
       <div className={`${footerContainer} pt-4`}>
-        <div className="grid gap-10 py-14 sm:gap-12 sm:py-16 lg:grid-cols-[2fr_1.25fr_1.75fr] lg:gap-x-10 lg:gap-y-0 lg:py-16">
-          <FooterBrand />
+        <div className="grid gap-10 py-12 sm:gap-12 sm:py-14 md:grid-cols-2 md:gap-x-8 lg:grid-cols-[2fr_1.25fr_1.75fr] lg:gap-x-10 lg:py-16 xl:py-20">
+          <div className="md:col-span-2 lg:col-span-1">
+            <FooterBrand />
+          </div>
           <FooterNavigation />
           <FooterContact />
         </div>
