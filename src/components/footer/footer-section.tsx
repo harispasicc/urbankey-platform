@@ -1,21 +1,13 @@
+"use client";
+
+import { useTranslations } from "@/i18n/language-context";
 import { footerContainer } from "@/lib/layout";
 import { FooterBrand } from "./footer-brand";
 import { FooterContact, FooterNavigation } from "./footer-nav-contact";
 
-function FooterBottomBar() {
-  return (
-    <div className="flex flex-col gap-3 border-t border-urban-gold/12 py-6 text-center sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:text-left">
-      <p className="text-[0.8125rem] text-white/50">
-        © 2026 UrbanKey Sarajevo. All rights reserved.
-      </p>
-      <p className="text-[0.8125rem] text-white/50">
-        Built for stress-free apartment hosting.
-      </p>
-    </div>
-  );
-}
-
 export function FooterSection() {
+  const t = useTranslations();
+
   return (
     <footer className="relative border-t border-urban-gold/20 bg-[#0f1218] text-white">
       <div
@@ -35,7 +27,10 @@ export function FooterSection() {
           <FooterNavigation />
           <FooterContact />
         </div>
-        <FooterBottomBar />
+        <div className="flex flex-col gap-3 border-t border-urban-gold/12 py-6 text-center sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:text-left">
+          <p className="text-[0.8125rem] text-white/50">{t.footer.copyright}</p>
+          <p className="text-[0.8125rem] text-white/50">{t.footer.motto}</p>
+        </div>
       </div>
     </footer>
   );

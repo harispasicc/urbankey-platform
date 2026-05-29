@@ -1,14 +1,30 @@
-import { FOOTER_CONTACT, FOOTER_NAV, FOOTER_TRUST } from "./footer-data";
+"use client";
+
+import { useMemo } from "react";
+import { NAV_SECTIONS } from "@/i18n/nav-sections";
+import { useTranslations } from "@/i18n/language-context";
+import { CTA_CONTACT } from "../cta/cta-data";
 import { FooterLink } from "./footer-link";
 
 export function FooterNavigation() {
+  const t = useTranslations();
+
+  const links = useMemo(
+    () =>
+      NAV_SECTIONS.map(({ id, key }) => ({
+        href: `#${id}`,
+        label: t.nav[key],
+      })),
+    [t],
+  );
+
   return (
-    <nav aria-label="Footer navigation">
+    <nav aria-label={t.footer.navigation}>
       <p className="text-[0.6875rem] font-medium uppercase tracking-[0.22em] text-urban-gold/85">
-        Navigation
+        {t.footer.navigation}
       </p>
       <ul className="mt-5 space-y-4">
-        {FOOTER_NAV.map((item) => (
+        {links.map((item) => (
           <li key={item.href} className="leading-relaxed">
             <FooterLink href={item.href}>{item.label}</FooterLink>
           </li>
@@ -19,27 +35,29 @@ export function FooterNavigation() {
 }
 
 export function FooterContact() {
+  const t = useTranslations();
+
   return (
     <div>
       <p className="text-[0.6875rem] font-medium uppercase tracking-[0.22em] text-urban-gold/85">
-        Contact
+        {t.footer.contact}
       </p>
       <ul className="mt-4 space-y-3 text-sm">
         <li>
-          <FooterLink href={FOOTER_CONTACT.phoneHref} external>
-            {FOOTER_CONTACT.phone}
+          <FooterLink href={CTA_CONTACT.phoneHref} external>
+            {CTA_CONTACT.phone}
           </FooterLink>
         </li>
         <li>
-          <FooterLink href={FOOTER_CONTACT.emailHref} external>
-            {FOOTER_CONTACT.email}
+          <FooterLink href={CTA_CONTACT.emailHref} external>
+            {CTA_CONTACT.email}
           </FooterLink>
         </li>
-        <li className="text-white/75">{FOOTER_CONTACT.location}</li>
+        <li className="text-white/75">{t.contact.location}</li>
       </ul>
 
       <ul className="mt-6 space-y-2">
-        {FOOTER_TRUST.map((item) => (
+        {t.footer.trust.map((item) => (
           <li
             key={item}
             className="flex items-center gap-2 text-[0.8125rem] text-white/55"

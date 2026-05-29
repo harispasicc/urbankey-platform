@@ -1,24 +1,18 @@
-import { siteContainer, sectionEyebrow, sectionHeading, sectionProse } from "@/lib/layout";
-import { FeaturedServiceCard, ServiceCard } from "./service-card";
-import { FEATURED_SERVICE, GRID_SERVICES } from "./services-data";
+"use client";
 
-function ServicesHeader() {
-  return (
-    <header className="max-w-2xl">
-      <p className={sectionEyebrow}>Services</p>
-      <h2 id="services-heading" className={`mt-3 ${sectionHeading}`}>
-        What we manage for your apartment
-      </h2>
-      <div className="mt-4 h-px w-12 bg-urban-gold/45" aria-hidden />
-      <p className={`mt-4 ${sectionProse}`}>
-        Hands-on Airbnb and Booking operations — the tasks owners usually handle
-        themselves, covered by one local team.
-      </p>
-    </header>
-  );
-}
+import { useTranslations } from "@/i18n/language-context";
+import { SERVICE_ICONS } from "@/i18n/section-icons";
+import {
+  siteContainer,
+  sectionEyebrow,
+  sectionHeading,
+  sectionProse,
+} from "@/lib/layout";
+import { FeaturedServiceCard, ServiceCard } from "./service-card";
 
 export function ServicesSection() {
+  const t = useTranslations();
+
   return (
     <section
       id="services"
@@ -40,16 +34,32 @@ export function ServicesSection() {
       />
 
       <div className={`${siteContainer} relative py-12 sm:py-14 lg:py-16 xl:py-[4.5rem]`}>
-        <ServicesHeader />
+        <header className="max-w-2xl">
+          <p className={sectionEyebrow}>{t.services.eyebrow}</p>
+          <h2 id="services-heading" className={`mt-3 ${sectionHeading}`}>
+            {t.services.title}
+          </h2>
+          <div className="mt-4 h-px w-12 bg-urban-gold/45" aria-hidden />
+          <p className={`mt-4 ${sectionProse}`}>{t.services.description}</p>
+        </header>
 
         <ul className="mt-11 grid grid-cols-1 gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:mt-14 lg:grid-cols-3 lg:gap-5 xl:gap-6">
           <li className="sm:col-span-2 lg:col-span-3">
-            <FeaturedServiceCard {...FEATURED_SERVICE} />
+            <FeaturedServiceCard
+              coreLabel={t.services.coreLabel}
+              title={t.services.featured.title}
+              description={t.services.featured.description}
+              Icon={SERVICE_ICONS[0]}
+            />
           </li>
 
-          {GRID_SERVICES.map((service) => (
+          {t.services.items.map((service, index) => (
             <li key={service.title} className="min-w-0">
-              <ServiceCard {...service} />
+              <ServiceCard
+                title={service.title}
+                description={service.description}
+                Icon={SERVICE_ICONS[index + 1]}
+              />
             </li>
           ))}
         </ul>

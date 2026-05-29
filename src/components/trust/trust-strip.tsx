@@ -1,11 +1,7 @@
-import { siteContainer } from "@/lib/layout";
+"use client";
 
-const TRUST_ITEMS = [
-  "Local Sarajevo-based team",
-  "Airbnb & Booking focused",
-  "Responsive owner support",
-  "Transparent communication",
-] as const;
+import { useTranslations } from "@/i18n/language-context";
+import { siteContainer } from "@/lib/layout";
 
 function CheckIcon() {
   return (
@@ -27,6 +23,8 @@ function CheckIcon() {
 }
 
 export function TrustStrip() {
+  const t = useTranslations();
+
   return (
     <section
       aria-labelledby="trust-strip-heading"
@@ -37,10 +35,10 @@ export function TrustStrip() {
           id="trust-strip-heading"
           className="text-center font-sans text-[0.9375rem] font-semibold tracking-[0.02em] text-urban-navy sm:text-base"
         >
-          Built for Sarajevo apartment owners
+          {t.trustStrip.title}
         </h2>
         <ul className="mt-5 grid grid-cols-1 gap-3 min-[375px]:grid-cols-2 sm:mt-6 sm:gap-x-8 sm:gap-y-3 lg:grid-cols-4">
-          {TRUST_ITEMS.map((item) => (
+          {t.trustStrip.items.map((item) => (
             <li
               key={item}
               className="flex min-h-[2.75rem] items-center gap-2.5 text-[0.8125rem] leading-snug text-urban-charcoal sm:text-[0.875rem]"

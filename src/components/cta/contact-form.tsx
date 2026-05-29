@@ -6,75 +6,25 @@ import {
   type ChangeEvent,
   type FormEvent,
 } from "react";
+import { useTranslations } from "@/i18n/language-context";
+import {
+  validateContactForm,
+  type ContactFormErrors,
+  type ContactFormValues,
+} from "@/lib/contact-form-validation";
 import { TextAreaField, TextField } from "./form-field";
 
 const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID
   ? `https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID}`
   : null;
 
-type FormErrors = Partial<
-  Record<
-    "name" | "apartmentLocation" | "email" | "phone" | "message" | "form",
-    string
-  >
->;
-
-type FormValues = {
-  name: string;
-  apartmentLocation: string;
-  email: string;
-  phone: string;
-  message: string;
-};
-
-const INITIAL_VALUES: FormValues = {
+const INITIAL_VALUES: ContactFormValues = {
   name: "",
   apartmentLocation: "",
   email: "",
   phone: "",
   message: "",
 };
-
-function isValidEmail(value: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
-}
-
-function isValidPhone(value: string) {
-  const digits = value.replace(/\D/g, "");
-  return digits.length >= 8 && digits.length <= 15;
-}
-
-function validate(values: FormValues): FormErrors {
-  const errors: FormErrors = {};
-
-  if (!values.name.trim()) {
-    errors.name = "Please enter your full name.";
-  } else if (values.name.trim().length < 2) {
-    errors.name = "Name should be at least 2 characters.";
-  }
-
-  if (!values.apartmentLocation.trim()) {
-    errors.apartmentLocation = "Please enter your apartment location.";
-  }
-
-  if (!values.email.trim()) {
-    errors.email = "Please enter your email address.";
-  } else if (!isValidEmail(values.email)) {
-    errors.email = "Enter a valid email address.";
-  }
-
-  if (values.phone.trim() && !isValidPhone(values.phone)) {
-    errors.phone = "Enter a valid phone number.";
-  }
-
-  if (!values.message.trim()) {
-    errors.message = "Please tell us a little about your apartment.";
-  } else if (values.message.trim().length < 10) {
-    errors.message = "Message should be at least 10 characters.";
-  }
-
-  return errors;
-}
 
 function SubmitArrow({ className }: { className?: string }) {
   return (
@@ -98,14 +48,17 @@ function SubmitArrow({ className }: { className?: string }) {
 }
 
 export function ContactForm() {
-  const [values, setValues] = useState<FormValues>(INITIAL_VALUES);
-  const [errors, setErrors] = useState<FormErrors>({});
+  const t = useTranslations();
+  const f = t.contact.form;
+
+  const [values, setValues] = useState<ContactFormValues>(INITIAL_VALUES);
+  const [errors, setErrors] = useState<ContactFormErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">(
     "idle",
   );
 
   const updateField = useCallback(
-    (field: keyof FormValues) =>
+    (field: keyof ContactFormValues) =>
       (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setValues((prev) => ({ ...prev, [field]: e.target.value }));
         setErrors((prev) => {
@@ -121,16 +74,14 @@ export function ContactForm() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const nextErrors = validate(values);
+    const nextErrors = validateContactForm(values, f.errors);
     if (Object.keys(nextErrors).length > 0) {
       setErrors(nextErrors);
       return;
     }
 
     if (!FORMSPREE_ENDPOINT) {
-      setErrors({
-        form: "Form is not configured yet. Email us at urbankeysarajevo@gmail.com.",
-      });
+      setErrors({ form: f.errors.notConfigured });
       return;
     }
 
@@ -147,7 +98,7 @@ export function ContactForm() {
     body.append("message", values.message.trim());
     body.append(
       "_subject",
-      `UrbanKey consultation — ${values.apartmentLocation.trim()}`,
+      `UrbanKey consultation, ${values.apartmentLocation.trim()}`,
     );
 
     try {
@@ -165,9 +116,7 @@ export function ContactForm() {
       setValues(INITIAL_VALUES);
     } catch {
       setStatus("error");
-      setErrors({
-        form: "Something went wrong. Please try again or contact us directly.",
-      });
+      setErrors({ form: f.errors.submitFailed });
     }
   }
 
@@ -178,18 +127,17 @@ export function ContactForm() {
         role="status"
       >
         <p className="font-sans text-lg font-semibold text-urban-navy">
-          Thank you — we received your request.
+          {f.successTitle}
         </p>
         <p className="mt-2 text-[0.9375rem] leading-relaxed text-urban-charcoal">
-          Our Sarajevo team will get back to you shortly with next steps for your
-          apartment.
+          {f.successBody}
         </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
           className="mt-6 min-h-11 text-sm font-medium text-urban-gold transition-colors hover:text-[#8a7048] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-urban-gold"
         >
-          Send another message
+          {f.sendAnother}
         </button>
       </div>
     );
@@ -215,9 +163,9 @@ export function ContactForm() {
       <TextField
         id="contact-name"
         name="name"
-        label="Full name"
+        label={f.name}
         autoComplete="name"
-        placeholder="Your name"
+        placeholder={f.namePlaceholder}
         value={values.name}
         onChange={updateField("name")}
         error={errors.name}
@@ -228,9 +176,9 @@ export function ContactForm() {
       <TextField
         id="contact-location"
         name="apartment_location"
-        label="Apartment location"
+        label={f.location}
         autoComplete="street-address"
-        placeholder="e.g. Baščaršija, Sarajevo"
+        placeholder={f.locationPlaceholder}
         value={values.apartmentLocation}
         onChange={updateField("apartmentLocation")}
         error={errors.apartmentLocation}
@@ -243,9 +191,9 @@ export function ContactForm() {
           id="contact-email"
           name="email"
           type="email"
-          label="Email"
+          label={f.email}
           autoComplete="email"
-          placeholder="you@email.com"
+          placeholder={f.emailPlaceholder}
           value={values.email}
           onChange={updateField("email")}
           error={errors.email}
@@ -256,9 +204,9 @@ export function ContactForm() {
           id="contact-phone"
           name="phone"
           type="tel"
-          label="Phone (optional)"
+          label={f.phone}
           autoComplete="tel"
-          placeholder="+387 …"
+          placeholder={f.phonePlaceholder}
           value={values.phone}
           onChange={updateField("phone")}
           error={errors.phone}
@@ -269,8 +217,8 @@ export function ContactForm() {
       <TextAreaField
         id="contact-message"
         name="message"
-        label="Message"
-        placeholder="Tell us about your apartment, current setup, or what you need help with."
+        label={f.message}
+        placeholder={f.messagePlaceholder}
         value={values.message}
         onChange={updateField("message")}
         error={errors.message}
@@ -286,10 +234,11 @@ export function ContactForm() {
 
       <button
         type="submit"
+        data-testid="contact-form-submit"
         disabled={status === "submitting"}
         className="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-urban-gold px-6 py-3.5 text-sm font-semibold tracking-[0.02em] text-urban-navy shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_4px_16px_rgba(154,130,86,0.25)] transition-[background-color,box-shadow,opacity] duration-300 ease-out hover:bg-urban-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-urban-gold disabled:cursor-not-allowed disabled:opacity-70"
       >
-        {status === "submitting" ? "Sending…" : "Request consultation"}
+        {status === "submitting" ? f.sending : f.submit}
         <SubmitArrow className="opacity-85 transition-transform duration-300 group-hover:translate-x-0.5" />
       </button>
     </form>

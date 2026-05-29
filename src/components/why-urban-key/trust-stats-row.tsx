@@ -1,16 +1,16 @@
-const STATS = [
-  { value: "Sarajevo", label: "Local operations" },
-  { value: "Responsive", label: "Owner support" },
-  { value: "Airbnb & Booking", label: "Platform focus" },
-] as const;
-
-export function TrustStatsRow({ className = "" }: { className?: string }) {
+export function TrustStatsRow({
+  className = "",
+  stats,
+}: {
+  className?: string;
+  stats: readonly { value: string; label: string }[];
+}) {
   return (
     <div
       className={`grid grid-cols-1 divide-y divide-urban-gold/15 rounded-lg border border-urban-gold/18 bg-[#f5f0e8]/80 sm:grid-cols-3 sm:divide-x sm:divide-y-0 ${className}`}
       role="list"
     >
-      {STATS.map((item) => (
+      {stats.map((item) => (
         <div
           key={item.label}
           className="px-4 py-3.5 text-center sm:px-4 sm:py-4"

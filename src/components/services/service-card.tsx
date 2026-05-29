@@ -1,5 +1,10 @@
 import type { ComponentType } from "react";
-import type { ServiceItem } from "./services-data";
+
+type ServiceItem = {
+  title: string;
+  description: string;
+  Icon: ComponentType<{ className?: string }>;
+};
 
 const CARD_BASE =
   "group relative flex h-full overflow-hidden rounded-xl border border-urban-navy/[0.06] bg-[#faf7f2] shadow-[0_2px_10px_rgba(20,24,32,0.035)] transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-0.5 hover:border-urban-gold/22 hover:shadow-[0_10px_32px_rgba(100,75,40,0.09)]";
@@ -24,7 +29,12 @@ function ServiceIcon({
   );
 }
 
-export function FeaturedServiceCard({ title, description, Icon }: ServiceItem) {
+export function FeaturedServiceCard({
+  title,
+  description,
+  Icon,
+  coreLabel,
+}: ServiceItem & { coreLabel: string }) {
   return (
     <article className={`${CARD_BASE} p-5 sm:p-6`}>
       <span className={CARD_TOP_ACCENT} aria-hidden />
@@ -32,7 +42,7 @@ export function FeaturedServiceCard({ title, description, Icon }: ServiceItem) {
         <ServiceIcon Icon={Icon} large />
         <div className="min-w-0 flex-1 sm:pt-1">
           <p className="text-[0.625rem] font-medium uppercase tracking-[0.2em] text-urban-brass">
-            Core service
+            {coreLabel}
           </p>
           <h3 className="mt-1 font-sans text-xl font-semibold leading-snug text-urban-navy sm:text-[1.375rem]">
             {title}

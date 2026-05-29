@@ -1,12 +1,16 @@
+"use client";
+
+import { useTranslations } from "@/i18n/language-context";
 import { absoluteUrl } from "@/lib/site";
-import { FAQ_ITEMS } from "./faq-data";
 
 export function FaqJsonLd() {
+  const t = useTranslations();
+
   const faqPage = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "@id": `${absoluteUrl("/")}#faq`,
-    mainEntity: FAQ_ITEMS.map((item) => ({
+    mainEntity: t.faq.items.map((item) => ({
       "@type": "Question",
       name: item.question,
       acceptedAnswer: {

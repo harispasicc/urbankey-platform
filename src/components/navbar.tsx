@@ -1,16 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { BrandLogoLockup } from "@/components/brand-logo";
+import { NAV_SECTIONS } from "@/i18n/nav-sections";
+import { useTranslations } from "@/i18n/language-context";
 import { siteContainer } from "@/lib/layout";
-
-const NAV_LINKS = [
-  { href: "#services", label: "Services", id: "services" },
-  { href: "#how-it-works", label: "How it works", id: "how-it-works" },
-  { href: "#why-urban-key", label: "Why UrbanKey", id: "why-urban-key" },
-  { href: "#contact", label: "Contact", id: "contact" },
-] as const;
+import { LanguageSwitcher } from "./navbar/language-switcher";
 
 function NavLink({
   href,
@@ -58,9 +54,20 @@ function MenuIcon({ open }: { open: boolean }) {
 }
 
 export function Navbar() {
+  const t = useTranslations();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+
+  const navLinks = useMemo(
+    () =>
+      NAV_SECTIONS.map(({ id, key }) => ({
+        id,
+        href: `#${id}`,
+        label: t.nav[key],
+      })),
+    [t],
+  );
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
@@ -76,7 +83,7 @@ export function Navbar() {
       const offset = window.innerHeight * 0.35;
       let current: string | null = null;
 
-      for (const { id } of NAV_LINKS) {
+      for (const { id } of navLinks) {
         const el = document.getElementById(id);
         if (el && el.getBoundingClientRect().top <= offset) {
           current = id;
@@ -93,7 +100,7 @@ export function Navbar() {
       window.removeEventListener("scroll", updateActive);
       window.removeEventListener("resize", updateActive);
     };
-  }, []);
+  }, [navLinks]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -115,65 +122,53 @@ export function Navbar() {
       >
         <Link
           href="/"
-          className="flex shrink-0 items-center gap-3.5 sm:gap-4"
+          className="flex shrink-0 items-center"
           onClick={closeMenu}
+          aria-label="UrbanKey Sarajevo"
         >
-          <Image
-            src="/urbankey-logo.png"
-            alt=""
-            width={48}
-            height={48}
-            priority
-            sizes="44px"
-            className="h-10 w-10 shrink-0 object-contain sm:h-11 sm:w-11"
-            aria-hidden
-          />
-          <span className="flex flex-col justify-center gap-1.5 border-l border-urban-gold/25 py-0.5 pl-3.5 sm:gap-2 sm:pl-4">
-            <span className="font-sans text-[0.9375rem] font-bold leading-tight tracking-[0.13em] text-urban-navy sm:text-base">
-              URBAN <span className="text-urban-gold">KEY</span>
-            </span>
-            <span className="text-[0.625rem] font-medium uppercase leading-none tracking-[0.22em] text-urban-brass sm:text-[0.6875rem]">
-              Sarajevo
-            </span>
-          </span>
+          <BrandLogoLockup priority />
         </Link>
 
-        <nav
-          className="hidden items-center gap-6 lg:flex lg:gap-8 xl:gap-9"
-          aria-label="Primary"
-        >
-          {NAV_LINKS.map((link) => (
-            <NavLink
-              key={link.id}
-              href={link.href}
-              label={link.label}
-              isActive={activeSection === link.id}
-            />
-          ))}
-        </nav>
+        <div className="flex items-center gap-2 sm:gap-3">
+          <nav
+            className="hidden items-center gap-6 lg:flex lg:gap-8 xl:gap-9"
+            aria-label={t.nav.primaryAria}
+          >
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.id}
+                href={link.href}
+                label={link.label}
+                isActive={activeSection === link.id}
+              />
+            ))}
+          </nav>
 
-        <button
-          type="button"
-          className="flex h-11 w-11 items-center justify-center rounded-md text-urban-navy transition-colors hover:bg-urban-sand/50 lg:hidden"
-          aria-expanded={menuOpen}
-          aria-controls="mobile-nav"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          onClick={() => setMenuOpen((prev) => !prev)}
-        >
-          <MenuIcon open={menuOpen} />
-        </button>
+          <LanguageSwitcher />
+
+          <button
+            type="button"
+            className="flex h-11 w-11 items-center justify-center rounded-md text-urban-navy transition-colors hover:bg-urban-sand/50 lg:hidden"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+            aria-label={menuOpen ? t.nav.closeMenu : t.nav.openMenu}
+            onClick={() => setMenuOpen((prev) => !prev)}
+          >
+            <MenuIcon open={menuOpen} />
+          </button>
+        </div>
       </div>
 
       <div
         id="mobile-nav"
-        className={`overflow-hidden border-t border-urban-gold/10 bg-urban-cream/98 backdrop-blur-sm transition-[max-height,opacity] duration-300 ease-out lg:hidden ${menuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"}`}
+        className={`overflow-hidden border-t border-urban-gold/10 bg-urban-cream/98 backdrop-blur-sm transition-[max-height,opacity] duration-300 ease-out lg:hidden ${menuOpen ? "max-h-[22rem] opacity-100" : "max-h-0 opacity-0"}`}
         aria-hidden={!menuOpen}
       >
         <nav
           className={`${siteContainer} flex flex-col gap-0.5 py-3`}
-          aria-label="Mobile primary"
+          aria-label={t.nav.mobileAria}
         >
-          {NAV_LINKS.map((link) => (
+          {navLinks.map((link) => (
             <NavLink
               key={link.id}
               href={link.href}

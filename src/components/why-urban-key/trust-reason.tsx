@@ -1,6 +1,14 @@
-import type { ValueItem } from "./values-data";
+import type { ComponentType } from "react";
 
-export function TrustReason({ title, description, Icon }: ValueItem) {
+export function TrustReason({
+  title,
+  description,
+  Icon,
+}: {
+  title: string;
+  description: string;
+  Icon: ComponentType<{ className?: string }>;
+}) {
   return (
     <article className="flex gap-3.5 rounded-lg border border-urban-gold/12 bg-white/50 px-4 py-4 sm:gap-4 sm:px-4 sm:py-4">
       <div

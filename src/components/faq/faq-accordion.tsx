@@ -1,7 +1,12 @@
 "use client";
 
 import { useCallback, useId, useState } from "react";
-import type { FaqItem } from "./faq-data";
+
+export type FaqItem = {
+  id: string;
+  question: string;
+  answer: string;
+};
 
 function ChevronIcon({ open }: { open: boolean }) {
   return (

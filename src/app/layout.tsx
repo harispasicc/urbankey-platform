@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { AppProviders } from "@/components/providers/app-providers";
 import { JsonLd } from "@/components/seo/json-ld";
 import { siteConfig, absoluteUrl } from "@/lib/site";
 import "./globals.css";
@@ -43,8 +44,8 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [{ url: "/urbankey-logo.png", type: "image/jpeg", sizes: "any" }],
-    apple: [{ url: "/urbankey-logo.png", type: "image/jpeg" }],
+    icon: [{ url: "/urbankey-logo.png", type: "image/png", sizes: "any" }],
+    apple: [{ url: "/urbankey-logo.png", type: "image/png" }],
     shortcut: "/urbankey-logo.png",
   },
   openGraph: {
@@ -97,7 +98,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans text-urban-charcoal">
         <JsonLd />
-        {children}
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );

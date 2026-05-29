@@ -1,4 +1,8 @@
-import type { ProcessStep } from "./steps-data";
+type ProcessStep = {
+  step: string;
+  title: string;
+  description: string;
+};
 
 function StepNumber({
   step,
