@@ -43,7 +43,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const locale = useSyncExternalStore(
     subscribeLocale,
     readStoredLocale,
-    () => "en",
+    (): Locale => "en",
   );
 
   useEffect(() => {

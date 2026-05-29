@@ -12,6 +12,7 @@ jobs:
 
     env:
       CI: true
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       NEXT_PUBLIC_FORMSPREE_FORM_ID: test_form_id
       NEXT_PUBLIC_SITE_URL: https://urbankey.ba
       PLAYWRIGHT_BROWSERS_PATH: "0"
@@ -23,7 +24,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
 
       - name: Install dependencies
